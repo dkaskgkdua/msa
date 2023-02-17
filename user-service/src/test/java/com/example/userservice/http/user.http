@@ -1,0 +1,11 @@
+###
+POST http://localhost:60870/users
+Content-Type: application/json
+X-Requested-With: XMLHttpRequest
+Accept: application/json
+
+{
+"email":"dkaskgkdua@naver.com",
+"name":"song",
+"pwd":"g2"
+}
