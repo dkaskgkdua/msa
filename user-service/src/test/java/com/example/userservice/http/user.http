@@ -1,5 +1,5 @@
 ###
-POST http://localhost:60870/users
+POST http://localhost:8000/user-service/users
 Content-Type: application/json
 X-Requested-With: XMLHttpRequest
 Accept: application/json
@@ -9,3 +9,9 @@ Accept: application/json
 "name":"song",
 "pwd":"g2"
 }
+
+###
+GET http://localhost:8000/user-service/users
+
+###
+GET http://localhost:8000/user-service/users/d80c192e-2be8-4990-99a3-dacc1f2d5cf3
