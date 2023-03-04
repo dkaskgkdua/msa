@@ -1,0 +1,51 @@
+server:
+  port: 0
+
+spring:
+  application:
+    name: order-service
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 20MB
+  datasource:
+    url: jdbc:mysql://localhost:3306/msa?characterEncoding=utf8&allowPublicKeyRetrieval=true&useSSL=false
+    username: msa
+    password: 1234
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create
+      # ??? ????
+      use-new-id-generator-mappings: false
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    properties:
+      hibernate:
+        #        show_sql: ture
+        format_sql: true
+        # ??? ?? ???? ?? in?? ??? ???
+        default_batch_fetch_size: 100
+        jdbc.batch_size: 50
+        # bulk
+        order_inserts: true
+        order_updates: true
+        dialect:
+          storage_engine: innodb
+    #        hbm2ddl:
+    #          auto: create
+    open-in-view: false
+    show-sql: true
+
+eureka:
+  instance:
+    #    hostname? ?? ip? ? ??? application.name? ?? user-service??
+    instance-id: ${spring.cloud.client.hostname}:${spring.application.instance_id:${random.value}}
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://127.0.0.1:8761/eureka
+
+logging:
+  level:
+    com.example.orderservice: DEBUG
