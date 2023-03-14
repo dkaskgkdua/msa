@@ -1,5 +1,5 @@
 ###
-POST http://localhost:8000/user-service/users
+POST http://172.29.64.1:63960/users
 Content-Type: application/json
 X-Requested-With: XMLHttpRequest
 Accept: application/json
@@ -8,6 +8,15 @@ Accept: application/json
 "email":"dkaskgkdua@naver.com",
 "name":"song",
 "pwd":"g2"
+}
+### 094aab70-dfbc-4d96-9d9b-976ad6c852ad
+###
+# @no-redirect
+POST http://localhost:8000/user-service/login
+
+{
+"email":"dkaskgkdua@naver.com",
+"password":"g2"
 }
 
 ###
