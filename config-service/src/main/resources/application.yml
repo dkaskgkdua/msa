@@ -1,0 +1,13 @@
+server:
+  port: 8888
+# awsDevMJ ????? git repo? ?? ??? ??
+# localhost:port/yml???/default
+spring:
+  application:
+    name: config-service
+  cloud:
+    config:
+      server:
+        git:
+          uri: file://D:\awsDevMJ
+
