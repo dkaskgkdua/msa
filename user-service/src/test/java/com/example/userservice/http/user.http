@@ -1,5 +1,5 @@
 ###
-POST http://172.29.64.1:63960/users
+POST http://localhost:8000/user-service/users
 Content-Type: application/json
 X-Requested-With: XMLHttpRequest
 Accept: application/json
@@ -24,3 +24,11 @@ GET http://localhost:8000/user-service/users
 
 ###
 GET http://localhost:8000/user-service/users/d80c192e-2be8-4990-99a3-dacc1f2d5cf3
+
+### healthcheck
+GET http://localhost:8000/user-service/health_check
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJjZjdhYWM4ZC0zMjNhLTQ1NzQtODcxOS02YzZkMGRkYzE3Y2MiLCJleHAiOjE2NzkyOTg2ODZ9.ojm8TNIWDR6ELUDn3fJPtCmcl5s88ijnA0D66c2-uEXzxQKBRuI3G-q4pYouff7k4hWlaJZbyGjDH8nXcJZDYg
+
+### actuator refresh
+POST http://localhost:8000/user-service/actuator/refresh
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkYjMxMTNhYS05MjEzLTRmZjItOGZlMi0zMTM4YTcxYjhlZDgiLCJleHAiOjE2NzkyOTA2NTR9.epvEpcvoO7He8JhSbl-_Rq2kw1P0ySmcZ3nfmE6OyWs4hlEa4R2gp-9brawGl_x8lsHIgnEeFXEl-DR4_hLFSQ

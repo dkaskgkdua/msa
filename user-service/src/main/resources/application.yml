@@ -53,6 +53,12 @@ greeting:
 #  expiration_time: 86400000
 #  secret: user_token
 
+logging:
+  level:
+    root: info
+    org.hibernate.SQL: debug
+    org.hibernate.type: trace
+
 management:
   endpoints:
     web:
