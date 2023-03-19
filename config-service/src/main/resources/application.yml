@@ -9,5 +9,8 @@ spring:
     config:
       server:
         git:
-          uri: file://D:\awsDevMJ
+          uri: https://github.com/dkaskgkdua/msa-spring-cloud-config.git
+#          private repository 라면...
+#          username: [your username]
+#          password: [your password]
 
