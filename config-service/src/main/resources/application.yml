@@ -5,12 +5,27 @@ server:
 spring:
   application:
     name: config-service
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: guest
+#  profile:
+#    active: native
   cloud:
     config:
       server:
+#        native:
+#          search-locations: file:///C:\Users\dkask\Desktop\native
         git:
           uri: https://github.com/dkaskgkdua/msa-spring-cloud-config.git
+          default-label: master
 #          private repository 라면...
 #          username: [your username]
 #          password: [your password]
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, busrefresh
