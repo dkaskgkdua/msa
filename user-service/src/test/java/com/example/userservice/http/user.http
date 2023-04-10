@@ -36,3 +36,16 @@ Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJlYTY3YTU5MS0wNWRkLTQ3NGItO
 ### actuator bus refresh
 POST http://localhost:8000/user-service/actuator/busrefresh
 Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJlYTY3YTU5MS0wNWRkLTQ3NGItODM0ZS0xNDY5OTJmZTk1NWIiLCJleHAiOjE2NzkzMjk3MTV9.VvroN30UDcOfi1o2oSxCQt-tIb_5ojJNL-gQlvUu4W-zheJwu7UY7uaBMwTiWiQwVkr503kMm6YvJfC6v5xaqw
+
+### config encrypt
+POST http://localhost:8888/encrypt
+
+1234
+
+### config decrypt
+POST http://localhost:8888/decrypt
+
+972bb7a462be766740dacb2067b66b296bb798fbec7849c66ce3df32b56de59b
+
+### config decrypt
+GET http://localhost:8888/user-service/default
