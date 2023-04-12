@@ -40,12 +40,15 @@ Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJlYTY3YTU5MS0wNWRkLTQ3NGItO
 ### config encrypt
 POST http://localhost:8888/encrypt
 
-1234
+user_token_prod
 
 ### config decrypt
 POST http://localhost:8888/decrypt
 
 972bb7a462be766740dacb2067b66b296bb798fbec7849c66ce3df32b56de59b
 
-### config decrypt
+### config
 GET http://localhost:8888/user-service/default
+
+### config
+GET http://localhost:8888/config-service/default

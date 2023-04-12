@@ -1,2 +1,8 @@
 encrypt:
+  # 대칭키
   key: adfwefjkelkawjfewrkj12345156189
+  # 비대칭키
+#  key-store:
+#    location: file:///${user.home}}\Desktop\native
+#    password: test1234
+#    alias: apiEncryptionKey
