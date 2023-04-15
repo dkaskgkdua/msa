@@ -26,8 +26,10 @@ greeting:
 logging:
   level:
     root: info
+    com.example.userservice.client: DEBUG
     org.hibernate.SQL: debug
     org.hibernate.type: trace
+
 
 management:
   endpoints:
