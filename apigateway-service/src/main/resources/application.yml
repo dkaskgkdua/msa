@@ -8,6 +8,8 @@ eureka:
     fetch-registry: true
     service-url:
       defaultZone: http://localhost:8761/eureka
+#   감지주기를 설정한다 기본값은 30초임
+#    registry-fetch-interval-seconds: 30
 
 spring:
   application:
@@ -19,6 +21,11 @@ spring:
     password: guest
   cloud:
     gateway:
+#      discovery:
+#        locator:
+#   discovery에 등록된 서비스를 기반으로 경로를 만드는데 명시적으로 선언해주는게 더 선호
+#          enabled: true
+#          lowerCaseServiceId: true
       default-filters:
         - name: GlobalFilter
           args:
