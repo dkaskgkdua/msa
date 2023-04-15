@@ -1,0 +1,13 @@
+spring:
+  cloud:
+    config:
+      uri: http://127.0.0.1:8888
+      name: config-service
+#  profiles:
+#    active: dev
+
+
+# 혹시 여러개의 confg에 profile을 다르게 한다면
+#spring.cloud.config.name=myapp,myotherapp
+#spring.cloud.config.profile.dev=myapp
+#spring.cloud.config.profile.prod=myotherapp
