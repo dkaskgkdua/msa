@@ -24,10 +24,10 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
         http.authorizeRequests()
-                .antMatchers("/error/**", "/users", "/" +
-                        "health_check", "/actuator/**").permitAll()
-                .antMatchers("/**")
-                .hasIpAddress("172.29.64.1") // IP 제한
+                .antMatchers("/error/**", "/users",
+                        "/health_check", "/health_check/**", "/actuator/**").permitAll()
+                .antMatchers("/**").permitAll()
+//                .hasIpAddress("172.29.64.1") // IP 제한
                 .and()
                 .addFilter(getAuthentionFilter());
         http.headers().frameOptions().disable();
