@@ -24,18 +24,18 @@ GET http://localhost:8000/user-service/users
 
 ### 유저정보 호출
 GET http://localhost:8000/user-service/users/10ea02d6-57f1-44eb-8673-c23efb699727
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMGVhMDJkNi01N2YxLTQ0ZWItODY3My1jMjNlZmI2OTk3MjciLCJleHAiOjE2ODE2MzQwNzR9.gn24hqd1zSQFJeEsiFJDs0y4WmTe3dXRPNQVe3O-dxLmH20I5uHA1lM4qzoJVlDzJ5l6S4s1d_9M7PAsOH0c7w
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMGVhMDJkNi01N2YxLTQ0ZWItODY3My1jMjNlZmI2OTk3MjciLCJleHAiOjE2ODMwMDc3NzF9.J40b1fCPTUp4w7Dy04Ec3Ogavze-zvyOlV_yPtp8jQLoBQmoZifxN7QS9FrRstKiRxFDD6TjzYlGzo0V70HUfw
 
 ### 주문 추가
 POST http://localhost:8000/order-service/10ea02d6-57f1-44eb-8673-c23efb699727/orders
 Content-Type: application/json
 X-Requested-With: XMLHttpRequest
 Accept: application/json
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMGVhMDJkNi01N2YxLTQ0ZWItODY3My1jMjNlZmI2OTk3MjciLCJleHAiOjE2ODE2MzQwNzR9.gn24hqd1zSQFJeEsiFJDs0y4WmTe3dXRPNQVe3O-dxLmH20I5uHA1lM4qzoJVlDzJ5l6S4s1d_9M7PAsOH0c7w
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMGVhMDJkNi01N2YxLTQ0ZWItODY3My1jMjNlZmI2OTk3MjciLCJleHAiOjE2ODMwMDc3NzF9.J40b1fCPTUp4w7Dy04Ec3Ogavze-zvyOlV_yPtp8jQLoBQmoZifxN7QS9FrRstKiRxFDD6TjzYlGzo0V70HUfw
 
 {
-"productId":"1",
-"qty":1,
+"productId":"2",
+"qty":10,
 "unitPrice":5000
 }
 
@@ -68,3 +68,144 @@ GET http://localhost:8888/user-service/default
 
 ### config
 GET http://localhost:8888/config-service/default
+
+### kafka connect 리스트
+GET http://localhost:8083/connectors
+
+### kafka connect 리스트 상세
+GET http://localhost:8083/connectors/my-sink-connect2
+
+
+### kafka connect 생성
+POST http://localhost:8083/connectors
+Content-Type: application/json
+
+{
+
+    "name" : "my-source-connect",
+
+    "config" : {
+
+        "connector.class" : "io.confluent.connect.jdbc.JdbcSourceConnector",
+
+        "connection.url":"jdbc:mysql://localhost:3306/msa",
+
+        "connection.user":"msa",
+
+        "connection.password":"1234",
+
+        "mode": "incrementing",
+
+        "incrementing.column.name" : "id",
+
+        "table.whitelist":"users",
+
+        "topic.prefix" : "my_topic_",
+
+        "tasks.max" : "1"
+
+    }
+
+}
+
+### kafka connect connect2
+POST http://localhost:8083/connectors
+Content-Type: application/json
+
+{
+
+  "name" : "my-source-connect-2",
+
+  "config" : {
+
+    "connector.class" : "io.confluent.connect.jdbc.JdbcSourceConnector",
+
+    "connection.url":"jdbc:mysql://localhost:3306/msa",
+
+    "connection.user":"msa",
+
+    "connection.password":"1234",
+
+    "mode": "timestamp+incrementing",
+
+    "timestamp.column.name" : "modified_at",
+
+    "incremental.column.name" : "id",
+
+    "validate.non.null": false,
+
+    "table.whitelist":"users",
+
+    "topic.prefix" : "my_topic_2_",
+
+    "tasks.max" : "1"
+
+  }
+
+}
+
+### kafka sink connect
+POST http://localhost:8083/connectors
+Content-Type: application/json
+
+{
+
+  "name":"my-sink-connect",
+
+  "config":{
+
+      "connector.class":"io.confluent.connect.jdbc.JdbcSinkConnector",
+
+      "connection.url":"jdbc:mysql://localhost:3306/msa",
+
+      "connection.user":"msa",
+
+      "connection.password":"1234",
+
+      "auto.create":"true",
+
+      "auto.evolve":"true",
+
+      "delete.enabled":"false",
+
+      "tasks.max":"1",
+
+      "topics":"my_topic_users"
+
+  }
+
+}
+
+
+### kafka sink connect
+POST http://localhost:8083/connectors
+Content-Type: application/json
+
+{
+
+  "name":"my-sink-connect2",
+
+  "config":{
+
+      "connector.class":"io.confluent.connect.jdbc.JdbcSinkConnector",
+
+      "connection.url":"jdbc:mysql://localhost:3306/msa",
+
+      "connection.user":"msa",
+
+      "connection.password":"1234",
+
+      "auto.create":"true",
+
+      "auto.evolve":"true",
+
+      "delete.enabled":"false",
+
+      "tasks.max":"1",
+
+      "topics":"my_topic_2_users"
+
+  }
+
+}
+

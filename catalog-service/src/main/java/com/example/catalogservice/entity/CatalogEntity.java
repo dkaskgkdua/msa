@@ -5,6 +5,7 @@ import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Data
@@ -24,7 +25,6 @@ public class CatalogEntity implements Serializable {
     @Column(nullable = false)
     private Integer unitPrice;
 
-    @Column(nullable = false, updatable = false, insertable = false)
-    @ColumnDefault(value="CURRENT_TIMESTAMP")
-    private Date createdAt;
+    @Column(nullable = false, updatable = false, insertable = false, columnDefinition = "datetime default (CURRENT_TIME)")
+    private LocalDateTime createdAt;
 }
