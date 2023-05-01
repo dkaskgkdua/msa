@@ -4,6 +4,11 @@ server:
 spring:
   application:
     name: order-service
+  datasource:
+    url: jdbc:mysql://localhost:3307/orderdb?characterEncoding=utf8&allowPublicKeyRetrieval=true&useSSL=false
+    username: scott
+    password: 1234
+    driver-class-name: com.mysql.cj.jdbc.Driver
 
 eureka:
   instance:
