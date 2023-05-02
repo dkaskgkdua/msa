@@ -73,7 +73,17 @@ GET http://localhost:8888/config-service/default
 GET http://localhost:8083/connectors
 
 ### kafka connect 리스트 상세
-GET http://localhost:8083/connectors/my-sink-connect2
+GET http://localhost:8083/connectors/my-order-sink-connect
+
+### kafka connect 리스트 상세 status
+GET http://localhost:8083/connectors/my-order-sink-connect/status
+
+
+### kafka connect 삭제
+DELETE http://localhost:8083/connectors/my-order-sink-connect
+
+### kafka task 재실행
+POST http://localhost:8083/connectors/my-order-sink-connect/tasks/0/restart
 
 
 ### kafka connect 생성
@@ -143,6 +153,26 @@ Content-Type: application/json
   }
 
 }
+
+### kafka order sink connect
+POST http://localhost:8083/connectors
+Content-Type: application/json
+
+{
+  "name":"my-order-sink-connect",
+  "config":{
+      "connector.class":"io.confluent.connect.jdbc.JdbcSinkConnector",
+      "connection.url":"jdbc:mysql://localhost:3306/msa",
+      "connection.user":"root",
+      "connection.password":"1234",
+      "auto.create":"true",
+      "auto.evolve":"true",
+      "delete.enabled":"false",
+      "tasks.max":"1",
+      "topics":"orders"
+  }
+}
+
 
 ### kafka sink connect
 POST http://localhost:8083/connectors
