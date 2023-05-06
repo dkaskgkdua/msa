@@ -4,9 +4,16 @@ server:
 spring:
   application:
     name: order-service
+  zipkin:
+    base-url: http://127.0.0.1:9411
+    enabled: true
+  sleuth:
+    sampler:
+      # 얼마나 많은 비율로 zipkin에 transaction을 전송할 것인가
+      probability: 1.0
   datasource:
-    url: jdbc:mysql://localhost:3307/orderdb?characterEncoding=utf8&allowPublicKeyRetrieval=true&useSSL=false
-    username: scott
+    url: jdbc:mysql://localhost:3306/msa?characterEncoding=utf8&allowPublicKeyRetrieval=true&useSSL=false
+    username: msa
     password: 1234
     driver-class-name: com.mysql.cj.jdbc.Driver
 
