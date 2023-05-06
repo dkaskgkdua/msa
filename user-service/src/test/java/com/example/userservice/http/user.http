@@ -1,5 +1,5 @@
 ###
-POST http://localhost:8000/user-service/users
+POST {{api-host}}/user-service/users
 Content-Type: application/json
 X-Requested-With: XMLHttpRequest
 Accept: application/json
@@ -12,26 +12,35 @@ Accept: application/json
 ### 5eecd261-1947-4b17-8ceb-e8f71c56441f
 ###
 # @no-redirect
-POST http://localhost:8000/user-service/login
+POST {{api-host}}/user-service/login
 
 {
 "email":"dkaskgkdua@naver.com",
 "password":"g2"
 }
 
+> {%
+client.test("로그인 성공 검증", function() {
+   client.assert(response.status === 200,  "로그인 실패");
+
+   client.global.set("token",response.headers.valueOf("token"));
+   client.global.set("userId", response.headers.valueOf("userId"));
+});
+%}
+
 ###
-GET http://localhost:8000/user-service/users
+GET {{api-host}}/user-service/users
 
 ### 유저정보 호출
-GET http://localhost:8000/user-service/users/10ea02d6-57f1-44eb-8673-c23efb699727
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMGVhMDJkNi01N2YxLTQ0ZWItODY3My1jMjNlZmI2OTk3MjciLCJleHAiOjE2ODMwMDc3NzF9.J40b1fCPTUp4w7Dy04Ec3Ogavze-zvyOlV_yPtp8jQLoBQmoZifxN7QS9FrRstKiRxFDD6TjzYlGzo0V70HUfw
+GET {{api-host}}/user-service/users/{{userId}}
+Authorization: Bearer {{token}}
 
 ### 주문 추가
-POST http://localhost:8000/order-service/10ea02d6-57f1-44eb-8673-c23efb699727/orders
+POST {{api-host}}/order-service/{{userId}}/orders
 Content-Type: application/json
 X-Requested-With: XMLHttpRequest
 Accept: application/json
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMGVhMDJkNi01N2YxLTQ0ZWItODY3My1jMjNlZmI2OTk3MjciLCJleHAiOjE2ODMwMDc3NzF9.J40b1fCPTUp4w7Dy04Ec3Ogavze-zvyOlV_yPtp8jQLoBQmoZifxN7QS9FrRstKiRxFDD6TjzYlGzo0V70HUfw
+Authorization: Bearer {{token}}
 
 {
 "productId":"2",
