@@ -4,6 +4,13 @@ server:
 spring:
   application:
     name: user-service
+  zipkin:
+    base-url: http://127.0.0.1:9411
+    enabled: true
+  sleuth:
+    sampler:
+      # 얼마나 많은 비율로 zipkin에 transaction을 전송할 것인가
+      probability: 1.0
 
 eureka:
   instance:
