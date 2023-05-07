@@ -51,8 +51,12 @@ Authorization: Bearer {{token}}
 
 
 ### healthcheck
-GET http://localhost:8000/user-service/health_check
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJlYTY3YTU5MS0wNWRkLTQ3NGItODM0ZS0xNDY5OTJmZTk1NWIiLCJleHAiOjE2NzkzMjk3MTV9.VvroN30UDcOfi1o2oSxCQt-tIb_5ojJNL-gQlvUu4W-zheJwu7UY7uaBMwTiWiQwVkr503kMm6YvJfC6v5xaqw
+GET {{api-host}}/user-service/health_check
+Authorization: Bearer {{token}}
+
+### welcome
+GET {{api-host}}/user-service/welcome
+Authorization: Bearer {{token}}
 
 ### actuator refresh
 POST http://localhost:8000/user-service/actuator/refresh
