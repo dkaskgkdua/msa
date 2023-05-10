@@ -4,5 +4,7 @@ encrypt:
   # 비대칭키
 #  key-store:
 #    location: file:///${user.home}}\Desktop\native
+#    ## docker image 생성 시 경로
+#    location: file:/apiEncryptionKey.jks
 #    password: test1234
 #    alias: apiEncryptionKey
