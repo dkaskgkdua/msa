@@ -2,7 +2,12 @@
 * [도커 명령어 모음](https://song8420.tistory.com/394)
 * image 생성
 ```shell
-docker build -t dkaskgkdua/config-service:1.0
+docker build -t dkaskgkdua/config-service:1.0 .
+```
+
+* docker hub push
+```shell
+docker push dkaskgkdua/config-service:1.0
 ```
 
 * container 실행
