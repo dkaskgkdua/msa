@@ -1,4 +1,4 @@
-### docker 세팅
+### Config Server docker 세팅
 * [도커 명령어 모음](https://song8420.tistory.com/394)
 * image 생성
 ```shell
@@ -20,4 +20,55 @@ docker run -d -p 8888:8888 --network com-network -e "spring.rabbitmq.host=rabbit
 * network에 할당되어 있는 것인가 확인
 ```shell
 docker network inspect com-network
+```
+
+---
+
+### mysql db docker 세팅
+* 도커파일
+```dockerfile
+FROM mysql
+ENV MYSQL_ROOT_PASSWORD test1234
+ENV MYSQL_DATABASE mydb
+# ./mysql에서 /var/lib/mysql로 카피
+COPY ./mysql /var/lib/mysql
+EXPOSE 3306
+ENTRYPOINT ["mysqld", "--user=root"]
+```
+
+* image 생성
+```shell
+docker build -t dkaskgkdua/my_mysql -f Dockerfile_mysql
+```
+
+* docker hub push
+```shell
+docker push dkaskgkdua/my_mysql:1.0
+```
+
+* container 실행
+```shell
+docker run -d -p 3306:3306 --network com-network --name mysqldb dkaskgkdua/my_mysql
+```
+
+* container 접속
+```shell
+docker exec mysqldb /bin/bash
+```
+
+
+### zipkin
+```shell
+docker run -d -p 9411:9411 --network com-network --name zipkin openzipkin/zipkin
+```
+
+### prometheus
+```shell
+# 상대경로 세팅 불가능, 절대경로로 세팅 필요
+docker run -d -p 9090:9090 --network com-network --name prometheus -v C:\Users\dkask\IdeaProjects\msa\config-service/prometheus.yml:/etc/prometheus/prometheus.yml prom/prometheus
+```
+
+### grafana
+```shell
+docker run -d -p 3000:3000 --network com-network --name grafana grafana/grafana
 ```
