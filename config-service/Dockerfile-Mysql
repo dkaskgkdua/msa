@@ -1,0 +1,7 @@
+FROM mysql
+ENV MYSQL_ROOT_PASSWORD 1234
+ENV MYSQL_DATABASE msa
+# ./mysql에서 /var/lib/mysql로 카피
+#COPY ./mysql /var/lib/mysql
+EXPOSE 3306
+ENTRYPOINT ["mysqld", "--initialize"]

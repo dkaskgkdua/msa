@@ -28,32 +28,37 @@ docker network inspect com-network
 * 도커파일
 ```dockerfile
 FROM mysql
-ENV MYSQL_ROOT_PASSWORD test1234
-ENV MYSQL_DATABASE mydb
+ENV MYSQL_ROOT_PASSWORD 1234
+ENV MYSQL_DATABASE msa
 # ./mysql에서 /var/lib/mysql로 카피
 COPY ./mysql /var/lib/mysql
 EXPOSE 3306
-ENTRYPOINT ["mysqld", "--user=root"]
+ENTRYPOINT ["mysqld", "--initialize", "--user=root"]
 ```
 
 * image 생성
 ```shell
-docker build -t dkaskgkdua/my_mysql -f Dockerfile_mysql
+docker build -t dkaskgkdua/my_mysql:1.1 -f ./Dockerfile-Mysql .
 ```
 
 * docker hub push
 ```shell
-docker push dkaskgkdua/my_mysql:1.0
+docker push dkaskgkdua/my_mysql:1.1
 ```
 
 * container 실행
 ```shell
-docker run -d -p 3306:3306 --network com-network --name mysqldb dkaskgkdua/my_mysql
+docker run -d -p 3306:3306 --network com-network --name mysqldb dkaskgkdua/my_mysql:1.1
 ```
 
 * container 접속
 ```shell
 docker exec mysqldb /bin/bash
+```
+
+* 별첨
+```shell
+docker run --name mysqldb --hostname=d00abfe314a1 --network com-network --mac-address=02:42:ac:11:00:02 --env=MYSQL_SHELL_VERSION=8.0.30-1.el8 --env=MYSQL_ROOT_PASSWORD=1234 --env=PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin --env=GOSU_VERSION=1.14 --env=MYSQL_MAJOR=8.0 --env=MYSQL_VERSION=8.0.30-1.el8 --volume=/var/lib/mysql -p 3306:3306 --restart=no --runtime=runc -d mysql
 ```
 
 
